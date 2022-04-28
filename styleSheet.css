@@ -1,0 +1,19 @@
+#txtFieldUrl{
+    -fx-background-color: #202124;
+    -fx-text-fill: #ffff;
+    -fx-background-radius: 20px;
+}
+
+.btn{
+    -fx-background:inherit;
+    -fx-color: #ffff;
+}
+
+.menu{
+    -fx-background-color: #35363a;
+}
+
+.btn:hover{
+    -fx-background-color: rgba(255, 255, 255,0.5);
+    -fx-background-radius: 50%;
+}
