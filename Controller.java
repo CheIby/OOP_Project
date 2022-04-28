@@ -70,12 +70,18 @@ public class Controller implements Initializable {
     @FXML
     void zoomIn(ActionEvent event) {
         size += 0.25;
+        if (size > 5)
+            size = 5;
         webView.setZoom(size);
+
     }
 
     @FXML
     void zoomOut(ActionEvent event) {
         size -= 0.25;
+        if (size < 0.25)
+            size = 0.25;
+        System.out.println(size);
         webView.setZoom(size);
     }
 
