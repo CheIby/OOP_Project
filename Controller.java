@@ -4,10 +4,15 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable {
 
@@ -19,6 +24,9 @@ public class Controller implements Initializable {
 
     @FXML
     private Button btnRefresh;
+
+    @FXML
+    private Button btnSource;
 
     @FXML
     private Button btnZoomIn;
@@ -63,6 +71,20 @@ public class Controller implements Initializable {
     }
 
     @FXML
+    void source(ActionEvent event) {
+        showSource("test", (String) engine.executeScript("document.documentElement.outerHTML"));
+    }
+
+    private void showSource(String title, String source) {
+        TextArea newRoot = new TextArea(source);
+        Scene newScene = new Scene(newRoot, 600, 400);
+        Stage newWindow = new Stage();
+        newWindow.setTitle(title);
+        newWindow.setScene(newScene);
+        newWindow.show();
+    }
+
+    @FXML
     void goWeb(ActionEvent event) {
         loadUrl();
     }
@@ -73,7 +95,6 @@ public class Controller implements Initializable {
         if (size > 5)
             size = 5;
         webView.setZoom(size);
-
     }
 
     @FXML
@@ -94,7 +115,11 @@ public class Controller implements Initializable {
         engine.locationProperty().addListener((ov, oldstr, newstr) -> {
             txtFieldUrl.setText(newstr);
         });
+        webView.setOnKeyPressed((KeyEvent event) -> {
+            if (event.getCode() == KeyCode.F12) {
+                source(null);
+            }
+        });
         loadUrl();
     }
-
 }

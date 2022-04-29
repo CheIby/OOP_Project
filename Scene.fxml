@@ -43,7 +43,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TextField fx:id="txtFieldUrl" onAction="#goWeb" prefHeight="40.0" prefWidth="1600.0" promptText="URL" />
+            <TextField fx:id="txtFieldUrl" onAction="#goWeb" prefHeight="40.0" prefWidth="1395.0" promptText="URL" />
             <Button fx:id="btnZoomIn" mnemonicParsing="false" onAction="#zoomIn" prefHeight="40.0" prefWidth="50.0" styleClass="btn">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
@@ -62,11 +62,20 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="btnSource" mnemonicParsing="false" onAction="#source" prefHeight="40.0" prefWidth="50.0" styleClass="btn">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/dots.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
          <padding>
             <Insets left="40.0" right="40.0" top="10.0" />
          </padding>
       </HBox>
-      <WebView fx:id="webView" layoutY="65.0" prefHeight="842.0" prefWidth="1600.0" stylesheets="@styleSheet.css" />
+      <WebView fx:id="webView" layoutY="55.0" prefHeight="852.0" prefWidth="1600.0" stylesheets="@styleSheet.css" />
    </children>
 </AnchorPane>
