@@ -5,8 +5,8 @@
 }
 
 .btn{
-    -fx-background:inherit;
-    -fx-color: #ffff;
+    -fx-background-color: transparent;
+    -fx-background-radius: 50%;
 }
 
 .menu{
@@ -15,5 +15,4 @@
 
 .btn:hover{
     -fx-background-color: rgba(255, 255, 255,0.5);
-    -fx-background-radius: 50%;
 }
