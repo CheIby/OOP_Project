@@ -44,17 +44,21 @@ public class Controller implements Initializable {
     private double size;
 
     @FXML
-    void back(ActionEvent event) {
-        engine.getHistory().go(-1);
+    void back() {
+        if (engine.getHistory().getCurrentIndex() > 0) {
+            engine.getHistory().go(-1);
+        }
     }
 
     @FXML
-    void forward(ActionEvent event) {
-        engine.getHistory().go(1);
+    void forward() {
+        if (engine.getHistory().getCurrentIndex() + 1 < engine.getHistory().getEntries().size()) {
+            engine.getHistory().go(1);
+        }
     }
 
     @FXML
-    void refresh(ActionEvent event) {
+    void refresh() {
         engine.reload();
     }
 
@@ -71,7 +75,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void source(ActionEvent event) {
+    void source() {
         showSource("test", (String) engine.executeScript("document.documentElement.outerHTML"));
     }
 
@@ -90,19 +94,18 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void zoomIn(ActionEvent event) {
-        size += 0.25;
-        if (size > 5)
-            size = 5;
+    void zoomIn() {
+        size += 0.1;
+        if (size > 3)
+            size = 3;
         webView.setZoom(size);
     }
 
     @FXML
-    void zoomOut(ActionEvent event) {
-        size -= 0.25;
+    void zoomOut() {
+        size -= 0.1;
         if (size < 0.25)
             size = 0.25;
-        System.out.println(size);
         webView.setZoom(size);
     }
 
@@ -117,7 +120,26 @@ public class Controller implements Initializable {
         });
         webView.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode() == KeyCode.F12) {
-                source(null);
+                source();
+            }
+            if (event.isControlDown()) {
+                if (event.getCode() == KeyCode.MINUS) {
+                    zoomOut();
+                } else if (event.getCode() == KeyCode.EQUALS) {
+                    zoomIn();
+                }
+            }
+            if (event.getCode() == KeyCode.F5) {
+                refresh();
+            }
+            if (event.isAltDown()) {
+                if (event.getCode() == KeyCode.HOME) {
+                    engine.load(homePage);
+                } else if (event.getCode() == KeyCode.LEFT) {
+                    back();
+                } else if (event.getCode() == KeyCode.RIGHT) {
+                    forward();
+                }
             }
         });
         loadUrl();
